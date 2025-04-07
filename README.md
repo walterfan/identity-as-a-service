@@ -1,7 +1,21 @@
 # Identity as a Service
+
 Identity as a Service
 
 ## FAQ
+
+### What's IAM
+
+IAM is Identity and Access Management, which is a tool to manage fine-grained authorization. 
+In other words, it lets you control who can do what on which resources.
+
+Giving someone permissions in IAM involves the following three components:
+
+- Principal: The identity of the person or system that you want to give permissions to
+- Role: The collection of permissions that you want to give the principal
+- Resource: The Google Cloud resource that you want to let the principal access
+  
+To give the principal permission to access the resource, you grant them the role on the resource. You grant these roles using an allow policy.
 
 ### What's Workload, Workload Identity and Workload Attestation?
 * **Workload**: A discrete computing process, service, or application that performs specific tasks within a computing environment. Examples include containers, microservices, virtual machines, or serverless functions.
