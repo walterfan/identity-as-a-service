@@ -2,6 +2,45 @@
 
 Identity as a Service
 
+## IAM (Identity and Access Management)
+
+### **What is IAM?**  
+IAM (Identity and Access Management) is a security framework that ensures the right individuals (users, services, or systems) have the appropriate access to resources in a cloud or on-premises environment. It manages:  
+- **Identities** (users, groups, roles, service accounts)  
+- **Permissions** (policies defining what actions they can perform)  
+- **Authentication** (verifying identity) and **Authorization** (granting access)  
+
+### **Why Do We Need IAM?**  
+1. **Security** – Prevents unauthorized access to sensitive data and systems.  
+2. **Least Privilege Principle** – Grants only necessary permissions to users/applications.  
+3. **Compliance** – Helps meet regulatory requirements (e.g., GDPR, HIPAA).  
+4. **Centralized Control** – Manages access across multiple services from one place.  
+5. **Auditability** – Tracks who did what (via logs and monitoring).  
+
+### **How Does IAM Work?**  
+1. **Authentication** – Verifies identity (e.g., via passwords, MFA, or federated login).  
+2. **Authorization** – Checks policies to determine allowed actions (e.g., "Can User X delete S3 buckets?").  
+3. **Policies & Roles** – Defines permissions (e.g., AWS IAM policies, Azure RBAC roles).  
+4. **Access Management** – Assigns roles to users/groups (e.g., "Admin," "Read-Only").  
+5. **Audit & Monitoring** – Logs access events for security analysis.  
+
+### **Example (AWS IAM)**  
+- A **policy** allows an **IAM user** to "read S3 buckets."  
+- A **role** grants an **EC2 instance** permission to access DynamoDB.  
+- **MFA** adds an extra layer of security for admin logins.  
+
+## Protocols
+
+| **Protocol** | **Role in IAM**                       | **Commonly Paired With**      |  
+|--------------|---------------------------------------|-------------------------------|  
+| OAuth 2.0    | API authorization                     | OIDC, JWT                     |  
+| OIDC         | Authentication (SSO)                  | OAuth 2.0, SAML               |  
+| SAML         | Enterprise SSO                        | LDAP, AD                      |  
+| JWT          | Token format for claims               | OIDC, OAuth                   |  
+| LDAP         | User directory storage                | Kerberos, SAML                |  
+| SCIM         | User lifecycle management             | OAuth (for API calls)         |  
+| FIDO2        | Passwordless auth                     | OIDC (as second factor)       |  
+
 ## FAQ
 
 ### What's IAM
