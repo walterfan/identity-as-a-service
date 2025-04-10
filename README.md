@@ -41,20 +41,55 @@ IAM (Identity and Access Management) is a security framework that ensures the ri
 | SCIM         | User lifecycle management             | OAuth (for API calls)         |  
 | FIDO2        | Passwordless auth                     | OIDC (as second factor)       |  
 
+### **OAuth 2.0**  
+- **Purpose**: Delegated authorization (allows apps to access resources on behalf of users).  
+- **Key Use Case**: "Login with Google/Facebook," API access tokens.  
+- **How It Works**:  
+  - Issues short-lived **access tokens** (e.g., for APIs).  
+  - Uses **grant types** (Authorization Code, Client Credentials, etc.).  
+- **Not for Authentication** (but often misused as such).  
+
+### **OpenID Connect (OIDC)**  
+- **Purpose**: Authentication layer on top of OAuth 2.0.  
+- **Key Use Case**: Single Sign-On (SSO), user identity verification.  
+- **How It Works**:  
+  - Issues **ID tokens** (JWT format) containing user claims (e.g., email, name).  
+  - Uses OAuth flows + standardizes identity data (via `/userinfo` endpoint).  
+
+### **SAML 2.0 (Security Assertion Markup Language)**  
+- **Purpose**: Enterprise SSO (XML-based).  
+- **Key Use Case**: Corporate logins (e.g., Active Directory integrations).  
+- **How It Works**:  
+  - Exchanges **SAML assertions** between Identity Provider (IdP) and Service Provider (SP).  
+  - Browser redirects with base64-encoded XML messages.  
+
+### **JWT (JSON Web Token)**  
+- **Purpose**: Compact, self-contained token format for claims.  
+- **Key Use Case**: Stateless authentication (used in OIDC, API auth).  
+- **Structure**:  
+  ```text
+  Header.Claims.Signature
+  ```  
+  - Contains **claims** (e.g., `exp`, `sub`) and is signed/encrypted (JWS/JWE).  
+
+### **LDAP (Lightweight Directory Access Protocol)**  
+- **Purpose**: Directory services (user/group storage).  
+- **Key Use Case**: On-premises IAM (e.g., Microsoft AD, OpenLDAP).  
+- **How It Works**:  
+  - Queries hierarchical databases (users, groups, attributes).  
+  - Often paired with **Kerberos** for authentication.  
+
+### **SCIM (System for Cross-domain Identity Management)**  
+- **Purpose**: Automate user provisioning/deprovisioning.  
+- **Key Use Case**: Sync users between IdP and apps (e.g., Okta → Slack).  
+- **How It Works**: REST API standard for CRUD operations on user identities.  
+
+### **FIDO2/WebAuthn**  
+- **Purpose**: Passwordless authentication.  
+- **Key Use Case**: Biometrics/security keys (e.g., YubiKey, Windows Hello).  
+- **How It Works**: Public-key cryptography + browser APIs.  
+
 ## FAQ
-
-### What's IAM
-
-IAM is Identity and Access Management, which is a tool to manage fine-grained authorization. 
-In other words, it lets you control who can do what on which resources.
-
-Giving someone permissions in IAM involves the following three components:
-
-- Principal: The identity of the person or system that you want to give permissions to
-- Role: The collection of permissions that you want to give the principal
-- Resource: The Google Cloud resource that you want to let the principal access
-  
-To give the principal permission to access the resource, you grant them the role on the resource. You grant these roles using an allow policy.
 
 ### What's Workload, Workload Identity and Workload Attestation?
 * **Workload**: A discrete computing process, service, or application that performs specific tasks within a computing environment. Examples include containers, microservices, virtual machines, or serverless functions.
