@@ -1,0 +1,303 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAML &mdash; Identity as a Service 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e536ea0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="X.509 Certificate" href="x509.html" />
+    <link rel="prev" title="SPIFFE" href="spifee.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Identity as a Service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.basic/index.html">1. Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Protocol</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html">OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html#whats-oauth2">What‘s OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html">JWT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id2">利用 JWT 进行认证的过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id4">参考资料</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pkcs.html">PKCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_id.html">OIDC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spifee.html">SPIFFE</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">SAML</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id1">1. <strong>SAML 是什么？</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">2. <strong>关键概念</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">3. <strong>SAML 的核心协议</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#saml-web-sso">4. <strong>SAML 的工作流程（Web SSO 示例）</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">5. <strong>相关协议对比</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">6. <strong>开发者需要关注什么？</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">7. <strong>典型应用场景</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="x509.html">X.509 Certificate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="private_key.html">Privae Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wimse.html">WIMSE (Workload Identity in Multi-System Environments)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html">WIT (Workload Identity Token)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#wimse-wit"><strong>WIMSE 和 WIT 的关系</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#id5"><strong>总结</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3.library/index.html">2. Framework and Library</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Identity as a Service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2. Protocol</a></li>
+      <li class="breadcrumb-item active">SAML</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/2.protocol/saml.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="saml">
+<h1>SAML<a class="headerlink" href="#saml" title="Link to this heading"></a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h2>
+<section id="id1">
+<h3>1. <strong>SAML 是什么？</strong><a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>全称</strong>：Security Assertion Markup Language（安全断言标记语言）</p></li>
+<li><p><strong>本质</strong>：基于 XML 的开放标准，用于在**身份提供者（IdP）<strong>和</strong>服务提供者（SP）**之间交换认证和授权数据。</p></li>
+<li><p><strong>核心目标</strong>：实现<strong>跨域单点登录（SSO）</strong>，用户登录一次即可访问多个互信系统。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h3>2. <strong>关键概念</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>断言（Assertion）</strong>：IdP 生成的 XML 格式凭证，包含用户身份信息（如用户名、属性、权限）。</p>
+<ul>
+<li><p>三种类型：</p>
+<ul>
+<li><p><strong>认证断言</strong>：证明用户已登录。</p></li>
+<li><p><strong>属性断言</strong>：传递用户属性（如邮箱、部门）。</p></li>
+<li><p><strong>授权断言</strong>：声明用户是否有权限访问资源。</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>角色</strong>：</p>
+<ul>
+<li><p><strong>Identity Provider (IdP)</strong>：负责认证用户并生成断言（如公司LDAP、Azure AD）。</p></li>
+<li><p><strong>Service Provider (SP)</strong>：依赖 IdP 的断言授权用户访问资源（如SaaS应用）。</p></li>
+</ul>
+</li>
+<li><p><strong>协议流程</strong>：典型的浏览器重定向流程（如SP发起SSO请求 → IdP返回SAML响应）。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>3. <strong>SAML 的核心协议</strong><a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>SAML 1.x/2.0</strong>：主流版本是 SAML 2.0（2005年发布），支持更复杂的场景（如注销、元数据交换）。</p></li>
+<li><p><strong>绑定（Bindings）</strong>：定义如何传输SAML消息：</p>
+<ul>
+<li><p><strong>HTTP Redirect/POST</strong>：最常见（通过浏览器传递SAML数据）。</p></li>
+<li><p><strong>SOAP</strong>：用于后端通信（如属性查询）。</p></li>
+</ul>
+</li>
+<li><p><strong>元数据（Metadata）</strong>：XML文件描述IdP/SP的配置（如证书、端点URL），用于自动配置信任关系。</p></li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="saml-web-sso">
+<h3>4. <strong>SAML 的工作流程（Web SSO 示例）</strong><a class="headerlink" href="#saml-web-sso" title="Link to this heading"></a></h3>
+<div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>sequenceDiagram
+    User-&gt;&gt;SP: 访问应用
+    SP-&gt;&gt;User: 重定向到IdP（携带SAMLRequest）
+    User-&gt;&gt;IdP: 登录认证
+    IdP-&gt;&gt;User: 重定向回SP（携带SAMLResponse）
+    User-&gt;&gt;SP: 提交SAMLResponse
+    SP-&gt;&gt;IdP: 验证签名/断言
+    SP-&gt;&gt;User: 授权访问
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id4">
+<h3>5. <strong>相关协议对比</strong><a class="headerlink" href="#id4" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>协议</p></th>
+<th class="head"><p>场景</p></th>
+<th class="head"><p>数据格式</p></th>
+<th class="head"><p>传输方式</p></th>
+<th class="head"><p>特点</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>SAML</strong></p></td>
+<td><p>企业SSO、跨域</p></td>
+<td><p>XML</p></td>
+<td><p>HTTP Redirect/POST</p></td>
+<td><p>复杂但功能全，适合企业</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>OAuth2</strong></p></td>
+<td><p>API授权、移动端</p></td>
+<td><p>JSON</p></td>
+<td><p>HTTP/RESTful</p></td>
+<td><p>轻量，适合现代应用</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>OpenID Connect</strong></p></td>
+<td><p>社交登录</p></td>
+<td><p>JSON</p></td>
+<td><p>HTTP</p></td>
+<td><p>基于OAuth2，扩展身份层</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3>6. <strong>开发者需要关注什么？</strong><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>SP 集成</strong>：</p>
+<ul>
+<li><p>使用库（如Python的<code class="docutils literal notranslate"><span class="pre">python3-saml</span></code>、Java的<code class="docutils literal notranslate"><span class="pre">OpenSAML</span></code>）。</p></li>
+<li><p>解析SAMLResponse，验证签名和断言时效性。</p></li>
+</ul>
+</li>
+<li><p><strong>安全</strong>：</p>
+<ul>
+<li><p>必须启用<strong>签名/加密</strong>（防止篡改）。</p></li>
+<li><p>防范<strong>重放攻击</strong>（检查<code class="docutils literal notranslate"><span class="pre">InResponseTo</span></code>和断言时间戳）。</p></li>
+</ul>
+</li>
+<li><p><strong>调试工具</strong>：</p>
+<ul>
+<li><p>浏览器插件（如”SAML Tracer”查看请求/响应）。</p></li>
+<li><p>在线解码工具（解码Base64编码的SAML消息）。</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>7. <strong>典型应用场景</strong><a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>企业内部系统集成（如HR系统 + 邮箱 + 内部Wiki）。</p></li>
+<li><p>云服务SSO（如Salesforce、Workday通过企业AD登录）。</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="reference">
+<h1>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference external" href="https://goteleport.com/blog/how-saml-authentication-works">how-saml-authentication-works</a></p></li>
+<li><p><a class="reference external" href="https://blog.samlsecurity.com/p/opensaml.html">SAML Blog</a></p></li>
+<li><p><a class="reference external" href="https://datatracker.ietf.org/doc/html/rfc7522">SAML RFC7522</a></p></li>
+<li><p><a class="reference external" href="http://saml.xml.org/saml-specifications">SAML Specification</a></p></li>
+</ul>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spifee.html" class="btn btn-neutral float-left" title="SPIFFE" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="x509.html" class="btn btn-neutral float-right" title="X.509 Certificate" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 ~ 2035, Walter Fan, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

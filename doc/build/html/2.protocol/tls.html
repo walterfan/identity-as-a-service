@@ -1,0 +1,291 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TLS (Transport Layer Security) &mdash; Identity as a Service 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e536ea0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Identity as a Service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../1.basic/index.html">1. Basic</a></li>
+<li class="toctree-l1"><a class="reference internal" href="index.html">2. Protocol</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../3.library/index.html">2. Framework and Library</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Identity as a Service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">TLS (Transport Layer Security)</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/2.protocol/tls.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tls-transport-layer-security">
+<h1>TLS (Transport Layer Security)<a class="headerlink" href="#tls-transport-layer-security" title="Link to this heading"></a></h1>
+<section id="tcp-flow">
+<h2>TCP flow<a class="headerlink" href="#tcp-flow" title="Link to this heading"></a></h2>
+<p><img alt="TCP handshake" src="../_images/tcp-handshake.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span> <span class="n">TCP</span> <span class="n">handshake</span>
+<span class="n">participant</span> <span class="n">client</span>
+<span class="n">participant</span> <span class="n">server</span>
+<span class="n">autonumber</span> <span class="s2">&quot;&lt;b&gt;[00]&quot;</span>
+
+<span class="o">==</span> <span class="nb">open</span> <span class="o">==</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">server</span><span class="p">:</span> <span class="n">LISTEN</span>
+<span class="n">client</span> <span class="o">-&gt;</span> <span class="n">server</span><span class="p">:</span> <span class="n">SYN</span>
+<span class="n">note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">client</span><span class="p">:</span> <span class="n">SYN_SENT</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">server</span><span class="p">:</span> <span class="n">SYN_RCVD</span>
+<span class="n">server</span> <span class="o">--&gt;</span> <span class="n">client</span><span class="p">:</span> <span class="n">ACK</span><span class="o">/</span><span class="n">SYN</span>
+<span class="n">server</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="p">:</span> <span class="n">ACK</span>
+<span class="n">note</span> <span class="n">over</span> <span class="n">client</span><span class="p">,</span> <span class="n">server</span><span class="p">:</span> <span class="n">ESTABILISHED</span>
+
+<span class="o">==</span> <span class="n">close</span> <span class="o">==</span>
+
+<span class="n">client</span> <span class="o">-&gt;</span> <span class="n">server</span><span class="p">:</span> <span class="n">FIN</span>
+<span class="n">note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">client</span><span class="p">:</span> <span class="n">FIN_WAIT_1</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">server</span><span class="p">:</span> <span class="n">CLOSE_WAIT</span>
+<span class="n">server</span> <span class="o">--&gt;</span> <span class="n">client</span><span class="p">:</span> <span class="n">ACK</span>
+<span class="n">note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">client</span><span class="p">:</span> <span class="n">FIN_WAIT_2</span>
+<span class="n">server</span> <span class="o">-&gt;</span> <span class="n">client</span><span class="p">:</span> <span class="n">FIN</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">server</span><span class="p">:</span> <span class="n">LAST_ACK</span>
+<span class="n">note</span> <span class="n">left</span> <span class="n">of</span> <span class="n">client</span><span class="p">:</span> <span class="n">TIME_WAIT</span>
+<span class="n">client</span> <span class="o">--&gt;</span> <span class="n">server</span><span class="p">:</span> <span class="n">ACK</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">server</span> <span class="c1">#FFAAAA: CLOSED</span>
+</pre></div>
+</div>
+</section>
+<section id="mtls-flow">
+<h2>mTLS flow<a class="headerlink" href="#mtls-flow" title="Link to this heading"></a></h2>
+<p><img alt="mTLS sequence diagram" src="../_images/mTLS.png" /></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">title</span> <span class="n">mTLS</span> <span class="n">Handshake</span>
+<span class="n">participant</span> <span class="n">Client</span>
+<span class="n">participant</span> <span class="n">Server</span>
+<span class="n">participant</span> <span class="s2">&quot;Certificate Authority&quot;</span> <span class="k">as</span> <span class="n">CA</span>
+<span class="n">autonumber</span> <span class="s2">&quot;&lt;b&gt;[00]&quot;</span>
+
+<span class="o">==</span> <span class="n">Client</span> <span class="n">Hello</span> <span class="o">==</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">ClientHello</span> <span class="p">(</span><span class="n">Supported</span> <span class="n">Ciphers</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">ALPN</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">)</span>
+<span class="n">note</span> <span class="n">right</span> <span class="n">of</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Waiting</span> <span class="k">for</span> <span class="n">ServerHello</span>
+
+<span class="o">==</span> <span class="n">Server</span> <span class="n">Response</span> <span class="o">==</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">ServerHello</span> <span class="p">(</span><span class="n">Selected</span> <span class="n">Cipher</span><span class="p">,</span> <span class="n">Random</span><span class="p">,</span> <span class="n">Certificate</span><span class="p">,</span> <span class="n">etc</span><span class="o">.</span><span class="p">)</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">CertificateRequest</span> <span class="p">(</span><span class="n">Request</span> <span class="n">Client</span> <span class="n">Certificate</span><span class="p">)</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">CA</span><span class="p">:</span> <span class="n">Verify</span> <span class="n">Client</span> <span class="n">Certificate</span>
+<span class="n">CA</span> <span class="o">--&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Verification</span> <span class="n">Result</span>
+<span class="n">note</span> <span class="n">over</span> <span class="n">Server</span><span class="p">,</span> <span class="n">Client</span><span class="p">:</span> <span class="n">Server</span> <span class="n">Authentication</span> <span class="n">Completed</span>
+
+<span class="o">==</span> <span class="n">Client</span> <span class="n">Authentication</span> <span class="o">==</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Certificate</span> <span class="p">(</span><span class="n">Client</span> <span class="n">Certificate</span><span class="p">)</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">CA</span><span class="p">:</span> <span class="n">Verify</span> <span class="n">Server</span> <span class="n">Certificate</span>
+<span class="n">CA</span> <span class="o">--&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">Verification</span> <span class="n">Result</span>
+<span class="n">note</span> <span class="n">over</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Mutual</span> <span class="n">Authentication</span> <span class="n">Completed</span>
+
+<span class="o">==</span> <span class="n">Key</span> <span class="n">Exchange</span> <span class="o">==</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">ClientKeyExchange</span> <span class="p">(</span><span class="n">Keying</span> <span class="n">Material</span><span class="p">)</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">CertificateVerify</span> <span class="p">(</span><span class="n">Signature</span> <span class="n">to</span> <span class="n">Prove</span> <span class="n">Possession</span> <span class="n">of</span> <span class="n">Private</span> <span class="n">Key</span><span class="p">)</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Finished</span> <span class="p">(</span><span class="n">Encrypted</span> <span class="n">Message</span><span class="p">)</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">Finished</span> <span class="p">(</span><span class="n">Encrypted</span> <span class="n">Message</span><span class="p">)</span>
+<span class="n">note</span> <span class="n">over</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Secure</span> <span class="n">Encrypted</span> <span class="n">Channel</span> <span class="n">Established</span>
+
+<span class="o">==</span> <span class="n">Data</span> <span class="n">Transfer</span> <span class="o">==</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Encrypted</span> <span class="n">Application</span> <span class="n">Data</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">Encrypted</span> <span class="n">Application</span> <span class="n">Data</span>
+
+<span class="o">==</span> <span class="n">Connection</span> <span class="n">Termination</span> <span class="o">==</span>
+<span class="n">Client</span> <span class="o">-&gt;</span> <span class="n">Server</span><span class="p">:</span> <span class="n">CloseNotify</span>
+<span class="n">Server</span> <span class="o">-&gt;</span> <span class="n">Client</span><span class="p">:</span> <span class="n">CloseNotify</span>
+<span class="n">note</span> <span class="n">over</span> <span class="n">Client</span><span class="p">,</span> <span class="n">Server</span><span class="p">:</span> <span class="n">Secure</span> <span class="n">Connection</span> <span class="n">Closed</span>
+
+</pre></div>
+</div>
+</section>
+<section id="certificate">
+<h2>Certificate<a class="headerlink" href="#certificate" title="Link to this heading"></a></h2>
+<p>证书是一个数字文档，用于证明网站或个人的身份。它包含实体名称、实体类型、颁发日期和到期日期等信息。</p>
+<p>证书用于验证网站或个人的身份。它们还用于保障互联网上的数据传输安全。
+最常用的 X.509 证书参见 <a class="reference internal" href="x509.html"><span class="std std-doc">Certificate</span></a></p>
+</section>
+<section id="alpn">
+<h2>ALPN<a class="headerlink" href="#alpn" title="Link to this heading"></a></h2>
+<p>ALPN（Application-Layer Protocol Negotiation 应用层协议协商）是 TLS 协议的一个扩展，它使客户端和服务器能够在TLS握手过程中协商使用哪种应用层协议。这避免了额外的往返通信来确定应使用哪种协议的开销。</p>
+<p>ALPN对于HTTP/2、gRPC和QUIC等协议特别有用，在这些情况下，您可能希望在不发起单独握手的情况下协商使用哪种协议。</p>
+<section id="how-alpn-works">
+<h3>How ALPN Works<a class="headerlink" href="#how-alpn-works" title="Link to this heading"></a></h3>
+<p>During the TLS handshake:</p>
+<ul class="simple">
+<li><p>The client sends a list of supported protocols in the ALPN extension as part of the ClientHello message.</p></li>
+<li><p>The server responds with the protocol it chooses from the list in the ServerHello message.</p></li>
+<li><p>This negotiation happens before any actual data is transmitted, allowing both sides to immediately start using the chosen protocol (like HTTP/2) once the handshake is complete.</p></li>
+</ul>
+</section>
+<section id="applicationprotocolconfig-in-grpc-java">
+<h3><strong>ApplicationProtocolConfig in gRPC (Java)</strong><a class="headerlink" href="#applicationprotocolconfig-in-grpc-java" title="Link to this heading"></a></h3>
+<p>In gRPC’s Java implementation, <code class="docutils literal notranslate"><span class="pre">ApplicationProtocolConfig</span></code> is a class that allows configuration of ALPN settings for the gRPC client and server. When gRPC is using TLS (typically over HTTP/2), this configuration tells the underlying transport layer (like Netty) which protocols are supported and how to negotiate the protocol.</p>
+</section>
+<section id="key-aspects-of-alpn-in-grpc-java">
+<h3><strong>Key Aspects of ALPN in gRPC (Java)</strong><a class="headerlink" href="#key-aspects-of-alpn-in-grpc-java" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>Protocol Negotiation</strong>: ALPN allows gRPC clients and servers to specify the supported protocols during the TLS handshake. For example, the client might support HTTP/2, and the server might respond with the protocol that matches (or fall back to HTTP/1.1 if necessary).</p></li>
+<li><p><strong>ALPN in gRPC</strong>: gRPC generally uses ALPN to ensure that both sides (client and server) are in sync about which protocol should be used. If the server supports HTTP/2, the negotiation ensures that the connection uses HTTP/2 for communication rather than falling back to an older protocol like HTTP/1.1.</p></li>
+<li><p><strong>ApplicationProtocolConfig in Java gRPC</strong>: This class allows you to configure the ALPN protocols supported by the gRPC client or server. For example, it can specify that the client supports HTTP/2, and you might also add the protocols the server should support for proper negotiation.</p></li>
+</ol>
+</section>
+<section id="example-usage-in-grpc-java">
+<h3><strong>Example Usage in gRPC (Java)</strong><a class="headerlink" href="#example-usage-in-grpc-java" title="Link to this heading"></a></h3>
+<p>When you configure a gRPC client or server with TLS, you might want to set up ALPN configuration for protocol negotiation.</p>
+<p>Here’s an example for configuring an “ApplicationProtocolConfig” with a gRPC client:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
+<span class="kn">import</span> <span class="nn">io.grpc.netty.GrpcSslContexts</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.grpc.netty.NettyChannelBuilder</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.netty.handler.ssl.ApplicationProtocolConfig</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.netty.handler.ssl.ApplicationProtocolConfig.Protocol</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.netty.handler.ssl.ApplicationProtocolConfig.SelectedListenerFailureBehavior</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.netty.handler.ssl.ApplicationProtocolConfig.SelectorFailureBehavior</span><span class="p">;</span>
+<span class="kn">import</span> <span class="nn">io.netty.handler.ssl.SslContextBuilder</span><span class="p">;</span>
+
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="p">;</span>
+
+<span class="n">public</span> <span class="k">class</span> <span class="nc">ALPNExample</span> <span class="p">{</span>
+    <span class="n">public</span> <span class="n">static</span> <span class="n">void</span> <span class="n">main</span><span class="p">(</span><span class="n">String</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="n">throws</span> <span class="ne">Exception</span> <span class="p">{</span>
+        <span class="o">//</span> <span class="n">Build</span> <span class="n">SSL</span> <span class="n">context</span> <span class="k">with</span> <span class="n">ALPN</span> <span class="n">support</span> <span class="k">for</span> <span class="n">HTTP</span><span class="o">/</span><span class="mi">2</span>
+        <span class="n">SslContext</span> <span class="n">sslContext</span> <span class="o">=</span> <span class="n">GrpcSslContexts</span><span class="o">.</span><span class="n">forClient</span><span class="p">()</span>
+            <span class="o">.</span><span class="n">trustManager</span><span class="p">(</span><span class="n">InsecureTrustManagerFactory</span><span class="o">.</span><span class="n">INSTANCE</span><span class="p">)</span>  <span class="o">//</span> <span class="n">Trust</span> <span class="nb">all</span> <span class="n">servers</span>
+            <span class="o">.</span><span class="n">applicationProtocolConfig</span><span class="p">(</span><span class="n">new</span> <span class="n">ApplicationProtocolConfig</span><span class="p">(</span>
+                <span class="n">Protocol</span><span class="o">.</span><span class="n">ALPN</span><span class="p">,</span>  <span class="o">//</span> <span class="n">ALPN</span> <span class="n">protocol</span>
+                <span class="n">SelectorFailureBehavior</span><span class="o">.</span><span class="n">NO_ADVERTISE</span><span class="p">,</span>  <span class="o">//</span> <span class="n">Fail</span> <span class="k">if</span> <span class="n">no</span> <span class="n">protocol</span> <span class="n">match</span>
+                <span class="n">SelectedListenerFailureBehavior</span><span class="o">.</span><span class="n">ACCEPT</span><span class="p">,</span> <span class="o">//</span> <span class="n">Accept</span> <span class="k">if</span> <span class="n">negotiation</span> <span class="n">fails</span>
+                <span class="s2">&quot;h2&quot;</span><span class="p">,</span> <span class="s2">&quot;http/1.1&quot;</span>  <span class="o">//</span> <span class="n">Supported</span> <span class="n">protocols</span>
+            <span class="p">))</span><span class="o">.</span><span class="n">build</span><span class="p">();</span>
+
+        <span class="o">//</span> <span class="n">Create</span> <span class="n">the</span> <span class="n">Netty</span> <span class="n">channel</span> <span class="n">builder</span> <span class="ow">and</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">SSL</span> <span class="n">context</span>
+        <span class="n">NettyChannelBuilder</span> <span class="n">channelBuilder</span>
+           <span class="o">=</span> <span class="n">NettyChannelBuilder</span><span class="o">.</span><span class="n">forAddress</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span> <span class="mi">443</span><span class="p">))</span>
+            <span class="o">.</span><span class="n">sslContext</span><span class="p">(</span><span class="n">sslContext</span><span class="p">);</span>
+
+        <span class="o">//</span> <span class="n">Use</span> <span class="n">the</span> <span class="n">channel</span> <span class="k">for</span> <span class="n">your</span> <span class="n">gRPC</span> <span class="n">client</span> <span class="n">connection</span><span class="o">...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="key-points">
+<h3><strong>Key Points</strong>:<a class="headerlink" href="#key-points" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><strong>Protocol Negotiation</strong>: ALPN helps negotiate the correct application protocol (e.g., HTTP/2) for the connection.</p></li>
+<li><p><strong>ALPN Configurations</strong>: The <code class="docutils literal notranslate"><span class="pre">ApplicationProtocolConfig</span></code> allows you to specify which protocols you want to use and the behavior if the negotiation fails.</p></li>
+<li><p><strong>Usage in gRPC</strong>: This helps gRPC ensure that the connection uses the right protocol (e.g., HTTP/2) over a secure TLS connection.</p></li>
+</ul>
+<p>In summary, <code class="docutils literal notranslate"><span class="pre">ApplicationProtocolConfig</span></code> and ALPN are essential for making sure that the appropriate protocol is chosen when a gRPC client and server negotiate a TLS connection, especially when multiple protocols (like HTTP/2 and HTTP/1.1) are available.</p>
+</section>
+</section>
+<section id="reference">
+<h2>Reference<a class="headerlink" href="#reference" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>TLS 1.2 规范：RFC 5246 https://datatracker.ietf.org/doc/html/rfc5246</p></li>
+<li><p>TLS 1.3 规范：RFC 8446 https://datatracker.ietf.org/doc/html/rfc8446</p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 ~ 2035, Walter Fan, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

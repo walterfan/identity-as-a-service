@@ -1,0 +1,300 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privae Key &mdash; Identity as a Service 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e536ea0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="WIMSE (Workload Identity in Multi-System Environments)" href="wimse.html" />
+    <link rel="prev" title="X.509 Certificate" href="x509.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Identity as a Service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.basic/index.html">1. Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Protocol</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html">OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html#whats-oauth2">What‘s OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html">JWT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id2">利用 JWT 进行认证的过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id4">参考资料</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pkcs.html">PKCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_id.html">OIDC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spifee.html">SPIFFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="x509.html">X.509 Certificate</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Privae Key</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#pkcs-1-pkcs-8">PKCS#1 和 PKCS#8 私钥格式</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#pkcs-1"><strong>1. PKCS#1 私钥格式结构</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#pkcs-8"><strong>2. PKCS#8 私钥格式结构</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5"><strong>PKCS#1 和 PKCS#8 的关键区别</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="wimse.html">WIMSE (Workload Identity in Multi-System Environments)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html">WIT (Workload Identity Token)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#wimse-wit"><strong>WIMSE 和 WIT 的关系</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#id5"><strong>总结</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3.library/index.html">2. Framework and Library</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Identity as a Service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2. Protocol</a></li>
+      <li class="breadcrumb-item active">Privae Key</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/2.protocol/private_key.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="privae-key">
+<h1>Privae Key<a class="headerlink" href="#privae-key" title="Link to this heading"></a></h1>
+<section id="pkcs-1-pkcs-8">
+<h2>PKCS#1 和 PKCS#8 私钥格式<a class="headerlink" href="#pkcs-1-pkcs-8" title="Link to this heading"></a></h2>
+<p><strong>PKCS#1</strong> 和 <strong>PKCS#8</strong> 是两种常见的私钥格式，它们各自具有特定的结构和字段。以下是它们的详细结构和字段解释。</p>
+<hr class="docutils" />
+<section id="pkcs-1">
+<h3><strong>1. PKCS#1 私钥格式结构</strong><a class="headerlink" href="#pkcs-1" title="Link to this heading"></a></h3>
+<p><strong>PKCS#1</strong> 专门用于存储 RSA 密钥，包括 RSA 公钥和私钥。RSA 私钥是一个包含多个整数的结构，它包含了 RSA 算法的核心参数。以下是 <strong>PKCS#1</strong> 格式私钥的结构和主要字段：</p>
+<section id="id1">
+<h4><strong>PKCS#1 私钥结构</strong><a class="headerlink" href="#id1" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>RSAPrivateKey ::= SEQUENCE {
+    version       Version,
+    modulus       INTEGER,  -- n
+    publicExponent INTEGER, -- e
+    privateExponent INTEGER, -- d
+    prime1        INTEGER,  -- p
+    prime2        INTEGER,  -- q
+    exponent1     INTEGER,  -- dP = d % (p - 1)
+    exponent2     INTEGER,  -- dQ = d % (q - 1)
+    coefficient   INTEGER,  -- qInv = (1 / q) % p
+    otherPrimeInfo  SEQUENCE OF OtherPrimeInfo OPTIONAL
+}
+</pre></div>
+</div>
+<p><strong>字段说明</strong>：</p>
+<ol class="arabic simple">
+<li><p><strong>version</strong>：版本号，通常为 <code class="docutils literal notranslate"><span class="pre">0</span></code>（表示是 PKCS#1 版本 1 密钥）。在 PKCS#1 中，版本号是可选的，但一般使用版本号 <code class="docutils literal notranslate"><span class="pre">0</span></code>。</p></li>
+<li><p><strong>modulus (n)</strong>：RSA 模数，表示两个大质数 <code class="docutils literal notranslate"><span class="pre">p</span></code> 和 <code class="docutils literal notranslate"><span class="pre">q</span></code> 的乘积。这是公钥和私钥的一部分。</p></li>
+<li><p><strong>publicExponent (e)</strong>：公钥指数，通常设置为 <code class="docutils literal notranslate"><span class="pre">65537</span></code>（这是一个常见的值）。</p></li>
+<li><p><strong>privateExponent (d)</strong>：私钥指数，是解密运算的核心，满足 <code class="docutils literal notranslate"><span class="pre">e</span> <span class="pre">*</span> <span class="pre">d</span> <span class="pre">≡</span> <span class="pre">1</span> <span class="pre">(mod</span> <span class="pre">(p-1)(q-1))</span></code>。</p></li>
+<li><p><strong>prime1 (p)</strong> 和 <strong>prime2 (q)</strong>：RSA 私钥的两个质数，这两个数是 RSA 模数 <code class="docutils literal notranslate"><span class="pre">n</span></code> 的因子。</p></li>
+<li><p><strong>exponent1 (dP)</strong>：<code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">%</span> <span class="pre">(p</span> <span class="pre">-</span> <span class="pre">1)</span></code>，用于 CRT (Chinese Remainder Theorem) 加速 RSA 解密过程。</p></li>
+<li><p><strong>exponent2 (dQ)</strong>：<code class="docutils literal notranslate"><span class="pre">d</span> <span class="pre">%</span> <span class="pre">(q</span> <span class="pre">-</span> <span class="pre">1)</span></code>，同样是 CRT 加速的一部分。</p></li>
+<li><p><strong>coefficient (qInv)</strong>：<code class="docutils literal notranslate"><span class="pre">(1</span> <span class="pre">/</span> <span class="pre">q)</span> <span class="pre">%</span> <span class="pre">p</span></code>，用于加速 RSA 解密的 CRT 参数。</p></li>
+<li><p><strong>otherPrimeInfo</strong>：这个字段包含额外的质因数信息（如果存在），一般用于多质数的 RSA。</p></li>
+</ol>
+</section>
+<section id="id2">
+<h4><strong>PKCS#1 格式私钥示例</strong><a class="headerlink" href="#id2" title="Link to this heading"></a></h4>
+<p>PEM 编码的 PKCS#1 私钥格式如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-----</span><span class="n">BEGIN</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="n">MIIBOwIBAAJBAKQ2JtnVNNWQxeVAO6O9l0sXxUJbHnvpuJxhHwtPq7zyA5V0JkZB</span>
+<span class="n">yHNBqVfEKwz3rHVVqYX</span><span class="o">+</span><span class="n">vD4izNnsnn0tfKL0Eu5Ot</span><span class="o">+</span><span class="n">yCEzQZInJWeWshQyy8t1ns</span>
+<span class="n">DoFgfz7n9Bwy</span><span class="o">+</span><span class="n">gj6qZlXWeDgCKlUBn8KNpZKZrGx3g7g0WOpAhO5DqfKDiPHQdfu</span>
+<span class="n">L7guO0dsqbD5kwFg5A5zW6CGIcG0EGkqdywVsznXBIt7ct</span><span class="o">+</span><span class="n">PqaqympGEu9tIwwTg</span>
+<span class="n">Qmf9WwBlaMrb4VKuyt2W7P8l6YrUmRbGVLO5g8n8ryLw</span><span class="o">+</span><span class="n">gZycqD</span><span class="o">/</span><span class="n">YQg8yveLgKjS</span>
+<span class="n">IWlItPeW6</span><span class="o">/</span><span class="mi">1</span><span class="n">cGjzJtRsfJmc1mFqghPsbDbyGvtyq9GeXsA9jEX8kj9AeHTeblHkD</span>
+<span class="mi">5</span><span class="n">gWxkj0B</span><span class="o">+</span><span class="mi">9</span><span class="n">vfnCH1EKOsYQIH5x6rSi6Vrk5ul5yzojKzJlG4YidWfTyD7tQzMD1N</span>
+<span class="n">J9gCmzTmuB5ii</span><span class="o">+</span><span class="n">mPfEddH</span><span class="o">+</span><span class="n">Xq91cIduh5AKTI6ZokfwTwDLOk9kn1u9Fss5Jcswgs</span>
+<span class="n">cL</span><span class="o">+</span><span class="n">gF5vV5t5aZj70lrDiB1mpk1V69fI</span><span class="o">=</span>
+<span class="o">-----</span><span class="n">END</span> <span class="n">RSA</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="pkcs-8">
+<h3><strong>2. PKCS#8 私钥格式结构</strong><a class="headerlink" href="#pkcs-8" title="Link to this heading"></a></h3>
+<p><strong>PKCS#8</strong> 是一个更加通用的标准，支持多种算法的私钥。与 <strong>PKCS#1</strong> 格式不同，<strong>PKCS#8</strong> 可以用于表示除了 RSA 以外的其他密钥类型（例如 DSA、ECDSA 等）。PKCS#8 格式的私钥包含 <strong>私钥算法标识符</strong> 和 <strong>私钥数据</strong>。</p>
+<section id="id3">
+<h4><strong>PKCS#8 私钥结构</strong><a class="headerlink" href="#id3" title="Link to this heading"></a></h4>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>PrivateKeyInfo ::= SEQUENCE {
+    version         Version,
+    privateKeyAlgorithm PrivateKeyAlgorithmIdentifier,
+    privateKey      OCTET STRING
+}
+
+PrivateKeyAlgorithmIdentifier ::= SEQUENCE {
+    algorithm       OBJECT IDENTIFIER,
+    parameters      ANY DEFINED BY algorithm OPTIONAL
+}
+
+Version ::= INTEGER { v1(0) }
+
+PrivateKey ::= OCTET STRING
+</pre></div>
+</div>
+<p><strong>字段说明</strong>：</p>
+<ol class="arabic simple">
+<li><p><strong>version</strong>：版本号。<code class="docutils literal notranslate"><span class="pre">v1(0)</span></code> 表示 PKCS#8 版本 1，当前标准中大多使用版本号 <code class="docutils literal notranslate"><span class="pre">0</span></code>。</p></li>
+<li><p><strong>privateKeyAlgorithm</strong>：一个结构，包含密钥算法标识符和可选的参数：</p>
+<ul class="simple">
+<li><p><strong>algorithm</strong>：算法标识符，例如 RSA 使用的 <code class="docutils literal notranslate"><span class="pre">1.2.840.113549.1.1.1</span></code>，表示 RSA。</p></li>
+<li><p><strong>parameters</strong>：可选的参数，通常为空或与算法相关的参数（例如 EC 密钥会有椭圆曲线参数）。</p></li>
+</ul>
+</li>
+<li><p><strong>privateKey</strong>：包含实际的私钥数据，经过编码并存储为 OCTET STRING。这些数据是由特定算法（例如 RSA）私钥的实际数字组成。</p></li>
+</ol>
+</section>
+<section id="id4">
+<h4><strong>PKCS#8 格式私钥示例</strong><a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>PEM 编码的 PKCS#8 格式私钥示例如下：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">-----</span><span class="n">BEGIN</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+<span class="n">MIIEvgIBADANBgkqhkiG9w0BAQEFAASCATwggE4AgEAAkEAmZo0BqNzyP7kEo9tA</span>
+<span class="n">zyvF2Y</span><span class="o">+</span><span class="n">Xh</span><span class="o">+</span><span class="n">P0JHcQpBHzmLgf8yz0uNjmf9QOeug9oFgMZm0HhOYx1x</span><span class="o">/</span><span class="n">x6</span><span class="o">/</span><span class="n">ZTQrkM</span>
+<span class="mi">2</span><span class="n">obf4HJ9gKcFnFvK9o0mPSYPgN3gQhFqZEnK0U9TxTj9p8pLTKzYr34ml66y5R5f</span>
+<span class="n">yXhANMFc1FfcY7Ev3gpgjrZT1hGww3v</span><span class="o">/</span><span class="mi">8</span><span class="n">tO</span><span class="o">+</span><span class="n">P2WFTKmlfISIn</span><span class="o">+</span><span class="n">d5cVA5S</span><span class="o">+</span><span class="n">Mb06hrk</span>
+<span class="n">FHfR1VqxJlqOW3wMN41w9d8M5leudVgpfxI5</span><span class="o">/</span><span class="n">Fl3o5Gq3lX3GoIWZyFO4I4wftdM</span>
+<span class="mi">3</span><span class="n">Rqa8Xz9mQDbVrr73d5JwYQK</span><span class="o">+</span><span class="mi">1</span><span class="n">AGKbFsdvlydhplBbgI1mRPGxL8ocT7z9T8Ekwr</span>
+<span class="n">j4sBghld</span><span class="o">+</span><span class="n">ZZ5vVfqMBRY9d5pq7tFEJbxmwtr9kTuaPzO3IEm4Bfd0VrgTGHsgALH</span>
+<span class="n">Zc00a6iHtVK84BswS</span><span class="o">+</span><span class="n">a82N3x9Q9t4Az9l9RMRdMv60pM5PlBhhIhAOwP</span><span class="o">/</span><span class="n">kl5m6Wz</span>
+<span class="mi">2</span><span class="n">eWyLS3G5WauK8Sjd</span><span class="o">+</span><span class="n">Z5ob0ppZlIojN</span><span class="o">+</span><span class="n">gtK8CHc3RPsmXybgzVzSk6OQdx5A29LO</span>
+<span class="mi">5</span><span class="n">pfxwR4LfgS2wCKOZtPV0h9g2JkDHHlnZ4fgP3kbysb3ihrE8yNsf50ZmwX7MQO6</span>
+<span class="n">ax9hVg</span><span class="o">==</span>
+<span class="o">-----</span><span class="n">END</span> <span class="n">PRIVATE</span> <span class="n">KEY</span><span class="o">-----</span>
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h3><strong>PKCS#1 和 PKCS#8 的关键区别</strong><a class="headerlink" href="#id5" title="Link to this heading"></a></h3>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p><strong>字段/特性</strong></p></th>
+<th class="head"><p><strong>PKCS#1</strong></p></th>
+<th class="head"><p><strong>PKCS#8</strong></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>支持的算法</strong></p></td>
+<td><p>仅支持 RSA 算法</p></td>
+<td><p>支持多种算法（如 RSA、DSA、ECDSA 等）</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>结构</strong></p></td>
+<td><p>直接存储 RSA 密钥的各个部分，如 <code class="docutils literal notranslate"><span class="pre">n</span></code>、<code class="docutils literal notranslate"><span class="pre">e</span></code>、<code class="docutils literal notranslate"><span class="pre">d</span></code> 等</p></td>
+<td><p>包含一个 <strong>算法标识符</strong> 和 <strong>私钥数据</strong>，格式更通用</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>用途</strong></p></td>
+<td><p>专门为 RSA 密钥设计，通常用于存储 RSA 私钥和公钥</p></td>
+<td><p>适用于存储多种算法的私钥，可用于 RSA、DSA、ECDSA 等算法</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>可扩展性</strong></p></td>
+<td><p>不支持其他算法，只适用于 RSA</p></td>
+<td><p>支持多种算法，具有更强的通用性</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="x509.html" class="btn btn-neutral float-left" title="X.509 Certificate" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="wimse.html" class="btn btn-neutral float-right" title="WIMSE (Workload Identity in Multi-System Environments)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 ~ 2035, Walter Fan, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,312 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OIDC &mdash; Identity as a Service 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e536ea0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="SPIFFE" href="spifee.html" />
+    <link rel="prev" title="PKCS" href="pkcs.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Identity as a Service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.basic/index.html">1. Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Protocol</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html">OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html#whats-oauth2">What‘s OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html">JWT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id2">利用 JWT 进行认证的过程</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jwt.html#id4">参考资料</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pkcs.html">PKCS</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">OIDC</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#openid">OpenID 协议介绍</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#openid-connect">OpenID Connect 的核心角色</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">OpenID Connect 的核心概念</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id2">OpenID Connect 的授权流程</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id-token">ID Token 示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#userinfo-endpoint">UserInfo Endpoint 示例</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">总结</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="spifee.html">SPIFFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="x509.html">X.509 Certificate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="private_key.html">Privae Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wimse.html">WIMSE (Workload Identity in Multi-System Environments)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html">WIT (Workload Identity Token)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#wimse-wit"><strong>WIMSE 和 WIT 的关系</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html#id5"><strong>总结</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3.library/index.html">2. Framework and Library</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Identity as a Service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2. Protocol</a></li>
+      <li class="breadcrumb-item active">OIDC</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/2.protocol/open_id.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="oidc">
+<h1>OIDC<a class="headerlink" href="#oidc" title="Link to this heading"></a></h1>
+<p>OpenID Connect（OIDC）是一个基于OAuth 2.0协议的身份认证协议，它允许客户端应用程序通过第三方身份提供者（Identity Provider, IdP）验证用户身份并获取用户的基本信息。OpenID Connect建立在OAuth 2.0的授权框架之上，但它专注于身份认证，而OAuth 2.0主要用于授权。</p>
+<section id="openid">
+<h2>OpenID 协议介绍<a class="headerlink" href="#openid" title="Link to this heading"></a></h2>
+<p>OpenID 是一个基于 OAuth2 的身份验证协议，允许用户使用单一身份（如 Google、Facebook 等）登录多个网站或应用，而无需为每个网站创建独立的账号。OpenID 的核心目标是实现<strong>单点登录（SSO, Single Sign-On）</strong>。</p>
+<p>OpenID Connect（OIDC）是 OpenID 的扩展，基于 OAuth2 协议，增加了身份验证功能。它通过 ID Token（JWT 格式）传递用户身份信息。</p>
+<hr class="docutils" />
+<section id="openid-connect">
+<h3>OpenID Connect 的核心角色<a class="headerlink" href="#openid-connect" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>用户（End-User）</strong>：拥有身份信息的用户。</p></li>
+<li><p><strong>客户端（Client）</strong>：请求用户身份信息的第三方应用。</p></li>
+<li><p><strong>身份提供者（Identity Provider, IdP）</strong>：负责验证用户身份并颁发 ID Token。</p></li>
+<li><p><strong>授权服务器（Authorization Server）</strong>：与身份提供者集成，负责颁发访问令牌和 ID Token。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id1">
+<h3>OpenID Connect 的核心概念<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p><strong>ID Token</strong>：一个 JWT（JSON Web Token），包含用户的身份信息（如用户 ID、姓名、邮箱等）。</p></li>
+<li><p><strong>UserInfo Endpoint</strong>：一个 API 端点，客户端可以使用访问令牌获取用户的详细信息。</p></li>
+<li><p><strong>Discovery Document</strong>：一个 JSON 文件，包含 OpenID 服务的配置信息（如端点 URL、支持的算法等）。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id2">
+<h3>OpenID Connect 的授权流程<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>OpenID Connect 基于 OAuth2 的授权码模式（Authorization Code Flow），并增加了身份验证功能。</p>
+<section id="authorization-code-flow">
+<h4>授权码模式（Authorization Code Flow）<a class="headerlink" href="#authorization-code-flow" title="Link to this heading"></a></h4>
+<p><strong>步骤：</strong></p>
+<ol class="arabic simple">
+<li><p><strong>用户访问客户端</strong>：用户通过浏览器访问客户端应用。</p></li>
+<li><p><strong>重定向到授权服务器</strong>：客户端将用户重定向到授权服务器，请求授权和身份验证。</p></li>
+<li><p><strong>用户登录并授权</strong>：用户在授权服务器上登录并授权客户端访问其身份信息。</p></li>
+<li><p><strong>授权码返回</strong>：授权服务器将授权码通过重定向返回给客户端。</p></li>
+<li><p><strong>客户端请求令牌</strong>：客户端使用授权码向授权服务器请求访问令牌和 ID Token。</p></li>
+<li><p><strong>颁发令牌</strong>：授权服务器验证授权码并颁发访问令牌和 ID Token。</p></li>
+<li><p><strong>验证 ID Token</strong>：客户端验证 ID Token 的签名和内容。</p></li>
+<li><p><strong>访问用户信息</strong>：客户端使用访问令牌向 UserInfo Endpoint 请求用户的详细信息。</p></li>
+</ol>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id3">
+<h3>示例<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<section id="id4">
+<h4>示例场景<a class="headerlink" href="#id4" title="Link to this heading"></a></h4>
+<p>假设用户使用 Google 登录一个第三方应用（客户端）。</p>
+<ol class="arabic simple">
+<li><p><strong>用户访问客户端</strong>：用户打开第三方应用，点击“使用 Google 登录”。</p></li>
+<li><p><strong>重定向到 Google 授权服务器</strong>：客户端将用户重定向到 Google 的授权页面。</p></li>
+<li><p><strong>用户登录并授权</strong>：用户在 Google 上登录，并同意授权客户端访问其基本信息。</p></li>
+<li><p><strong>授权码返回</strong>：Google 将授权码通过重定向返回给客户端。</p></li>
+<li><p><strong>客户端请求令牌</strong>：客户端使用授权码向 Google 请求访问令牌和 ID Token。</p></li>
+<li><p><strong>颁发令牌</strong>：Google 验证授权码并颁发访问令牌和 ID Token。</p></li>
+<li><p><strong>验证 ID Token</strong>：客户端验证 ID Token 的签名和内容，确保其来自 Google。</p></li>
+<li><p><strong>访问用户信息</strong>：客户端使用访问令牌向 Google 的 UserInfo Endpoint 请求用户的详细信息（如姓名、邮箱等）。</p></li>
+</ol>
+</section>
+<hr class="docutils" />
+<section id="id5">
+<h4>流程图<a class="headerlink" href="#id5" title="Link to this heading"></a></h4>
+<div class="highlight-plaintext notranslate"><div class="highlight"><pre><span></span>+--------+                                   +---------------+
+|        |                                   |               |
+|  User  |                                   |  Authorization|
+|        |                                   |     Server    |
+|        |                                   |  (Google IdP) |
++---|----+                                   +-------|-------+
+    |                                                 |
+    | (1) User Accesses Client                        |
+    |------------------------------------------------&gt;|
+    |                                                 |
+    | (2) Redirect to Authorization Server            |
+    |&lt;------------------------------------------------|
+    |                                                 |
+    | (3) User Logs in and Authorizes Client          |
+    |------------------------------------------------&gt;|
+    |                                                 |
+    | (4) Authorization Code Returned                 |
+    |&lt;------------------------------------------------|
+    |                                                 |
+    | (5) Request Access Token and ID Token           |
+    |------------------------------------------------&gt;|
+    |                                                 |
+    | (6) Access Token and ID Token Issued            |
+    |&lt;------------------------------------------------|
+    |                                                 |
+    | (7) Validate ID Token                           |
+    |                                                 |
+    | (8) Request UserInfo                            |
+    |------------------------------------------------&gt;|
+    |                                                 |
+    | (9) UserInfo Returned                           |
+    |&lt;------------------------------------------------|
+    |                                                 |
++---|----+                                   +-------|-------+
+|        |                                   |               |
+| Client |                                   |  Resource     |
+|        |                                   |    Server     |
++--------+                                   +---------------+
+</pre></div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="id-token">
+<h3>ID Token 示例<a class="headerlink" href="#id-token" title="Link to this heading"></a></h3>
+<p>ID Token 是一个 JWT，包含以下信息：</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;iss&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://accounts.google.com&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 签发者</span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 用户唯一标识</span>
+<span class="w">  </span><span class="nt">&quot;aud&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;client-id&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 客户端 ID</span>
+<span class="w">  </span><span class="nt">&quot;exp&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1672444800</span><span class="p">,</span><span class="w"> </span><span class="c1">// 过期时间</span>
+<span class="w">  </span><span class="nt">&quot;iat&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1672441200</span><span class="p">,</span><span class="w"> </span><span class="c1">// 签发时间</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span><span class="w"> </span><span class="c1">// 用户姓名</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe@example.com&quot;</span><span class="w"> </span><span class="c1">// 用户邮箱</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="userinfo-endpoint">
+<h3>UserInfo Endpoint 示例<a class="headerlink" href="#userinfo-endpoint" title="Link to this heading"></a></h3>
+<p>客户端使用访问令牌向 UserInfo Endpoint 请求用户信息：</p>
+<p><strong>请求：</strong></p>
+<div class="highlight-http notranslate"><div class="highlight"><pre><span></span><span class="nf">GET</span> <span class="nn">/userinfo</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">https://accounts.google.com</span>
+<span class="na">Authorization</span><span class="o">:</span> <span class="l">Bearer &lt;access_token&gt;</span>
+</pre></div>
+</div>
+<p><strong>响应：</strong></p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;sub&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;1234567890&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;email&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;john.doe@example.com&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;picture&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://example.com/john.jpg&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<hr class="docutils" />
+<section id="id6">
+<h3>总结<a class="headerlink" href="#id6" title="Link to this heading"></a></h3>
+<p>OpenID Connect 是基于 OAuth2 的身份验证协议，通过 ID Token 和 UserInfo Endpoint 提供用户身份信息。它简化了单点登录的实现，广泛应用于现代互联网服务。通过 OpenID Connect，用户可以使用单一身份登录多个应用，而无需重复注册和登录。</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pkcs.html" class="btn btn-neutral float-left" title="PKCS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spifee.html" class="btn btn-neutral float-right" title="SPIFFE" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 ~ 2035, Walter Fan, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>

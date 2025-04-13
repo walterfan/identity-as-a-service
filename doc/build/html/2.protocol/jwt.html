@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JWT &mdash; Identity as a Service 1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/custom.css?v=e536ea0c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+
+  
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=29a6c3e3"></script>
+      <script src="../_static/doctools.js?v=9a2dae69"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script>let toggleHintShow = 'Click to show';</script>
+      <script>let toggleHintHide = 'Click to hide';</script>
+      <script>let toggleOpenOnPrint = 'true';</script>
+      <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+      <script src="../_static/design-tabs.js?v=f930bc37"></script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+      <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="PKCS" href="pkcs.html" />
+    <link rel="prev" title="OAuth2" href="oauth2.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Identity as a Service
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../1.basic/index.html">1. Basic</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Protocol</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html">OAuth2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="oauth2.html#whats-oauth2">What‘s OAuth2</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">JWT</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#header">1. Header 头部</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#payload">2. Payload 正文</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signature">3. Signature 签名</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">实例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">利用 JWT 进行认证的过程</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">简单流程</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">参考资料</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="pkcs.html">PKCS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="open_id.html">OIDC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="spifee.html">SPIFFE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html">SAML</a></li>
+<li class="toctree-l2"><a class="reference internal" href="saml.html#reference">Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="x509.html">X.509 Certificate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="private_key.html">Privae Key</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wimse.html">WIMSE (Workload Identity in Multi-System Environments)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wit.html">WIT (Workload Identity Token)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../3.library/index.html">2. Framework and Library</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Identity as a Service</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">2. Protocol</a></li>
+      <li class="breadcrumb-item active">JWT</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/2.protocol/jwt.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jwt">
+<h1>JWT<a class="headerlink" href="#jwt" title="Link to this heading"></a></h1>
+<p><a class="reference external" href="https://jwt.io/">JSON Web Tokens</a> are an open, industry standard RFC 7519 method for representing claims securely between two parties.</p>
+<p>JWT (Json Web Token) 是一种在双方之间传输的紧凑的，URL安全的令牌表示方式
+JWT 表示为编码的 JSON 对象， 可用于 JWS 的的负载， 或者 JWE 的明文
+签过名的 JWT 称 JWS(Json Web Signature)
+加过密的 JWT 称 JWE(Json Web Encryption)</p>
+<p>最终的 JWS 形为 <code class="docutils literal notranslate"><span class="pre">${Header}.${Payload}.${Signature}</span></code></p>
+<p>它包含三部分</p>
+<section id="header">
+<h2>1. Header 头部<a class="headerlink" href="#header" title="Link to this heading"></a></h2>
+<p>表示基本算法和格式的 JSON 对象, 例如</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;alg&quot;</span><span class="p">:</span> <span class="s2">&quot;HS256&quot;</span><span class="p">,</span> <span class="o">//</span><span class="n">签名算法是</span> <span class="n">HMAC</span> <span class="n">SHA256</span>
+  <span class="s2">&quot;typ&quot;</span><span class="p">:</span> <span class="s2">&quot;JWT&quot;</span> <span class="o">//</span> <span class="n">token</span> <span class="n">格式是</span> <span class="n">JWT</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="payload">
+<h2>2. Payload 正文<a class="headerlink" href="#payload" title="Link to this heading"></a></h2>
+<p>以一个 JSON 对象表示 JWT 中所包含的内容, 字段可自由定义, 以下 7 个字段是官方定义的</p>
+<ul class="simple">
+<li><p>iss (issuer)：签发人</p></li>
+<li><p>exp (expiration time)：过期时间</p></li>
+<li><p>sub (subject)：主题</p></li>
+<li><p>aud (audience)：受众</p></li>
+<li><p>nbf (Not Before)：生效时间</p></li>
+<li><p>iat (Issued At)：签发时间</p></li>
+<li><p>jti (JWT ID)：编号</p></li>
+</ul>
+<p>我们也可以加上自己定义的内容, 例如</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="s2">&quot;orgId&quot;</span><span class="p">:</span> <span class="s2">&quot;$orgId&quot;</span><span class="p">,</span>
+<span class="s2">&quot;userId&quot;</span><span class="p">:</span> <span class="s2">&quot;$userId&quot;</span><span class="p">,</span>
+<span class="s2">&quot;roles&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;admin&quot;</span><span class="p">],</span>
+<span class="s2">&quot;scopes&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;create&quot;</span><span class="p">,</span> <span class="s2">&quot;write&quot;</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="signature">
+<h2>3. Signature 签名<a class="headerlink" href="#signature" title="Link to this heading"></a></h2>
+<p>以头部所声明的算法将头部和正文部分的内容进行签名, 防止被人篡改.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">HMACSHA256</span><span class="p">(</span><span class="n">base64UrlEncode</span><span class="p">(</span><span class="n">header</span><span class="p">)</span> <span class="o">+</span> <span class="n">base64UrlEncode</span><span class="p">(</span><span class="n">payload</span><span class="p">),</span> <span class="n">secret</span><span class="p">)</span> 
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h2>实例<a class="headerlink" href="#id1" title="Link to this heading"></a></h2>
+<p>写一个简单的例子来演示一下 JWT的编码和解码</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.Claims</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.JwtBuilder</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.Jwts</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.SignatureAlgorithm</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.io.Encoders</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">io.jsonwebtoken.lang.Collections</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">lombok.extern.slf4j.Slf4j</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.crypto.spec.SecretKeySpec</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">javax.xml.bind.DatatypeConverter</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.security.Key</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Arrays</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Date</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.HashMap</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.Map</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">java.util.UUID</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * @Author: Walter Fan</span>
+<span class="cm"> * @Date: 16/6/2019, Sun</span>
+<span class="cm"> **/</span>
+<span class="nd">@Slf4j</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">JwtUtil</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">Long</span><span class="w"> </span><span class="n">ONE_HOUR_MS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">60</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100L</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">createJws</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">subject</span><span class="p">,</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">claims</span><span class="p">,</span><span class="w"> </span><span class="kt">long</span><span class="w"> </span><span class="n">liveSeconds</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">apiKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SignatureAlgorithm</span><span class="w"> </span><span class="n">signatureAlgorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SignatureAlgorithm</span><span class="p">.</span><span class="na">HS256</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">apiKeySecretBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DatatypeConverter</span><span class="p">.</span><span class="na">parseBase64Binary</span><span class="p">(</span><span class="n">apiKey</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Key</span><span class="w"> </span><span class="n">signingKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">apiKeySecretBytes</span><span class="p">,</span><span class="w"> </span><span class="n">signatureAlgorithm</span><span class="p">.</span><span class="na">getJcaName</span><span class="p">());</span>
+
+
+<span class="w">        </span><span class="kt">long</span><span class="w"> </span><span class="n">expMillis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">System</span><span class="p">.</span><span class="na">currentTimeMillis</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">liveSeconds</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Date</span><span class="w"> </span><span class="n">expireDate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">(</span><span class="n">expMillis</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">JwtBuilder</span><span class="w"> </span><span class="n">jwtBuilder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">builder</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">setId</span><span class="p">(</span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">().</span><span class="na">toString</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">setSubject</span><span class="p">(</span><span class="n">subject</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">setIssuedAt</span><span class="p">(</span><span class="k">new</span><span class="w"> </span><span class="n">Date</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">setExpiration</span><span class="p">(</span><span class="n">expireDate</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">signWith</span><span class="p">(</span><span class="n">signingKey</span><span class="p">);</span>
+
+<span class="w">        </span><span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="n">Collections</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">(</span><span class="n">claims</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">claims</span><span class="p">.</span><span class="na">entrySet</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="n">jwtBuilder</span><span class="p">.</span><span class="na">claim</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="na">getValue</span><span class="p">()));</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">jwtBuilder</span><span class="p">.</span><span class="na">compact</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Claims</span><span class="w"> </span><span class="nf">parseJws</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">compactJws</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">apiKey</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">SignatureAlgorithm</span><span class="w"> </span><span class="n">signatureAlgorithm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SignatureAlgorithm</span><span class="p">.</span><span class="na">HS256</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">byte</span><span class="o">[]</span><span class="w"> </span><span class="n">apiKeySecretBytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DatatypeConverter</span><span class="p">.</span><span class="na">parseBase64Binary</span><span class="p">(</span><span class="n">apiKey</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Key</span><span class="w"> </span><span class="n">signingKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">SecretKeySpec</span><span class="p">(</span><span class="n">apiKeySecretBytes</span><span class="p">,</span><span class="w"> </span><span class="n">signatureAlgorithm</span><span class="p">.</span><span class="na">getJcaName</span><span class="p">());</span>
+
+<span class="w">        </span><span class="n">Claims</span><span class="w"> </span><span class="n">ret</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Jwts</span><span class="p">.</span><span class="na">parser</span><span class="p">()</span>
+<span class="w">                </span><span class="p">.</span><span class="na">setSigningKey</span><span class="p">(</span><span class="n">signingKey</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">parseClaimsJws</span><span class="p">(</span><span class="n">compactJws</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">getBody</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ret</span><span class="p">;</span>
+
+<span class="w">    </span><span class="p">}</span>
+
+
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">proverb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;A journey of a thousand miles begins with a single step&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">apiKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Encoders</span><span class="p">.</span><span class="na">BASE64</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">proverb</span><span class="p">.</span><span class="na">getBytes</span><span class="p">());</span>
+<span class="w">        </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Object</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;orgId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">());</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;userId&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">UUID</span><span class="p">.</span><span class="na">randomUUID</span><span class="p">());</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;roles&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;admin&quot;</span><span class="p">));</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="s">&quot;scopes&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&quot;read&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;write&quot;</span><span class="p">));</span>
+
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">jws</span><span class="o">=</span><span class="w"> </span><span class="n">createJws</span><span class="p">(</span><span class="s">&quot;potato&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="mi">300</span><span class="p">,</span><span class="w"> </span><span class="n">apiKey</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;jws = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">jws</span><span class="p">);</span>
+
+<span class="w">        </span><span class="n">Claims</span><span class="w"> </span><span class="n">claims</span><span class="w"> </span><span class="o">=</span><span class="w">  </span><span class="n">parseJws</span><span class="p">(</span><span class="n">jws</span><span class="p">,</span><span class="w"> </span><span class="n">apiKey</span><span class="p">);</span>
+<span class="w">        </span><span class="n">claims</span><span class="p">.</span><span class="na">entrySet</span><span class="p">().</span><span class="na">stream</span><span class="p">().</span><span class="na">forEach</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">-&gt;</span><span class="w">  </span><span class="n">log</span><span class="p">.</span><span class="na">info</span><span class="p">(</span><span class="s">&quot;{} = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="na">getKey</span><span class="p">(),</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="na">getValue</span><span class="p">()));</span>
+
+
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>输出如下</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># 编码过的内容</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">jws</span> <span class="o">=</span> <span class="n">eyJhbGciOiJIUzM4NCJ9</span><span class="o">.</span><span class="n">eyJqdGkiOiJkOTJkNGRlZC00MjVjLTRhMGItYjVkZi05OGYzN2FiNDVmMzkiLCJzdWIiOiJwb3RhdG8iLCJpYXQiOjE1NjA2NjgwMjIsImV4cCI6MTU2MDY2ODMyMiwicm9sZXMiOlsiYWRtaW4iXSwic2NvcGVzIjpbInJlYWQiLCJ3cml0ZSJdLCJ1c2VySWQiOiIyNzYwMWE1Zi0zZDllLTQ3NWMtOGQzNS0wYTdlZGNlMzZhOGYiLCJvcmdJZCI6IjQ2ZDZhYjM1LTM5MmUtNDE4OS1iMGJjLTk3YzhkMzM2MzA2YSJ9</span><span class="o">.</span><span class="n">XydcyqdZD18Kgt0YqpOD_vD_NreHtNh_kyW8ZqxfWbhT4iNYOquQxsxyE8b2Xrul</span>
+
+<span class="c1"># 解码过的内容</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">jti</span> <span class="o">=</span> <span class="n">d92d4ded</span><span class="o">-</span><span class="mi">425</span><span class="n">c</span><span class="o">-</span><span class="mi">4</span><span class="n">a0b</span><span class="o">-</span><span class="n">b5df</span><span class="o">-</span><span class="mi">98</span><span class="n">f37ab45f39</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">potato</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">iat</span> <span class="o">=</span> <span class="mi">1560668022</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">exp</span> <span class="o">=</span> <span class="mi">1560668322</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">roles</span> <span class="o">=</span> <span class="p">[</span><span class="n">admin</span><span class="p">]</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">scopes</span> <span class="o">=</span> <span class="p">[</span><span class="n">read</span><span class="p">,</span> <span class="n">write</span><span class="p">]</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">userId</span> <span class="o">=</span> <span class="mi">27601</span><span class="n">a5f</span><span class="o">-</span><span class="mi">3</span><span class="n">d9e</span><span class="o">-</span><span class="mi">475</span><span class="n">c</span><span class="o">-</span><span class="mi">8</span><span class="n">d35</span><span class="o">-</span><span class="mi">0</span><span class="n">a7edce36a8f</span>
+<span class="n">JwtUtil</span> <span class="o">-</span> <span class="n">orgId</span> <span class="o">=</span> <span class="mi">46</span><span class="n">d6ab35</span><span class="o">-</span><span class="mf">392e-4189</span><span class="o">-</span><span class="n">b0bc</span><span class="o">-</span><span class="mi">97</span><span class="n">c8d336306a</span>
+</pre></div>
+</div>
+<p>在 Web Service 实际应用中, 经常把 JWT 放到 HTTP 的 Authorization 头域中, 客户端从认证服务器那里申请一个 token , 此 token 也就是认证服务器所签发的 JWT, 用这个 token 来访问资源.
+资源服务器会校验这个 token , 也会到认证服务器那里会验证。</p>
+</section>
+<section id="id2">
+<h2>利用 JWT 进行认证的过程<a class="headerlink" href="#id2" title="Link to this heading"></a></h2>
+<section id="id3">
+<h3>简单流程<a class="headerlink" href="#id3" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p>client 提供 username 和 password 向 server 器申请 auth token</p></li>
+<li><p>server 校验通过后，返回一个 auth token</p></li>
+<li><p>client 保存 auth token, 之后在后续的 API 请求中带着这个 token(HTTP 协议用 Authorization 头)</p></li>
+<li><p>server 从 Authorization 头中解码这个 token 并校验这个token</p></li>
+</ul>
+</section>
+</section>
+<section id="id4">
+<h2>参考资料<a class="headerlink" href="#id4" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jwt.io/">https://jwt.io/</a></p></li>
+</ul>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="oauth2.html" class="btn btn-neutral float-left" title="OAuth2" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="pkcs.html" class="btn btn-neutral float-right" title="PKCS" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021 ~ 2035, Walter Fan, Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+ <script type="text/javascript">
+    $(document).ready(function() {
+        $(".toggle > *").hide();
+        $(".toggle .header").show();
+        $(".toggle .header").click(function() {
+            $(this).parent().children().not(".header").toggle(400);
+            $(this).parent().children(".header").toggleClass("open");
+        })
+    });
+</script>
+
+
+</body>
+</html>
