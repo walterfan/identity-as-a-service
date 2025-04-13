@@ -169,3 +169,31 @@ idaas/
 │   └── tailwind.config.js
 └── README.md
 ```
+
+## Create DB and environment file
+* create datbase
+
+```sql
+
+CREATE DATABASE IF NOT EXISTS idaas;
+CREATE DATABASE IF NOT EXISTS keycloak;
+
+CREATE USER IF NOT EXISTS 'your_username'@'localhost' IDENTIFIED BY 'your_password';
+
+GRANT ALL PRIVILEGES ON keycloak.* TO 'your_username'@'localhost';
+GRANT ALL PRIVILEGES ON idaas.* TO 'your_username'@'localhost';
+
+FLUSH PRIVILEGES;
+```
+
+* create a file - .env
+
+```
+KC_DB=mysql
+KC_DB_URL=jdbc:mysql://keycloak-db:3306/keycloak
+KC_DB_USERNAME=keycloak
+KC_DB_PASSWORD=password
+KEYCLOAK_ADMIN=admin
+KEYCLOAK_ADMIN_PASSWORD=password
+
+```
