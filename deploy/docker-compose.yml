@@ -34,7 +34,19 @@ services:
       - "8020:8080"
     networks:
       - keycloak-net
-
+  nginx:
+      image: nginx:alpine
+      container_name: nginx-reverse-proxy
+      ports:
+        - "8022:80"
+        - "8023:443"
+      volumes:
+        - ./nginx/conf.d:/etc/nginx/conf.d
+        - ./nginx/certs:/etc/nginx/certs
+      depends_on:
+        - keycloak
+      networks:
+        - keycloak-net
 # volumes:
 #   keycloak-db-data:
 

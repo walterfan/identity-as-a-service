@@ -197,3 +197,12 @@ KEYCLOAK_ADMIN=admin
 KEYCLOAK_ADMIN_PASSWORD=password
 
 ```
+
+* create self-signed certificate
+```
+mkdir -p nginx/certs
+openssl req -x509 -nodes -days 1095 -newkey rsa:2048 \
+  -keyout nginx/certs/server.key \
+  -out nginx/certs/server.crt \
+  -subj "/CN=localhost"
+```
