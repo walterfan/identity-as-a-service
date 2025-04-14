@@ -24,12 +24,12 @@ services:
     command:
       - start-dev
     environment:
-      KC_DB: mysql
-      KC_DB_URL: ${KC_DB_URL}
-      KC_DB_USERNAME: ${KC_DB_USERNAME}
-      KC_DB_PASSWORD: ${KC_DB_PASSWORD}
-      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN_USERNAME}
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      #KC_DB: mysql
+      #KC_DB_URL: ${KC_DB_URL}
+      #KC_DB_USERNAME: ${KC_DB_USERNAME}
+      #KC_DB_PASSWORD: ${KC_DB_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_ADMIN_USERNAME}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
     ports:
       - "8020:8080"
     networks:
@@ -41,7 +41,7 @@ services:
         - "8022:80"
         - "8023:443"
       volumes:
-        - ./nginx/conf.d:/etc/nginx/conf.d
+        - ./nginx/conf:/etc/nginx/conf.d
         - ./nginx/certs:/etc/nginx/certs
       depends_on:
         - keycloak
